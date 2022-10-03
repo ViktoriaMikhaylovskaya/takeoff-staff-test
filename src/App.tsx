@@ -12,9 +12,6 @@ store.dispatch(fetchContactsAction());
 store.dispatch(getUserAction());
 
 function App() {
-
-  console.log(localStorage.getItem('status'));
-
   return (
     <BrowserRouter>
       <Routes>
