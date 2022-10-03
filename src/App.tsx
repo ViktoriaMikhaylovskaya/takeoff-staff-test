@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import Contacts from './pages/Contacts';
+import Login from './pages/Login';
+import NotFoundPage from './pages/NotFoundPage';
+import HomePage from './pages/HomePage';
+import { store } from './store';
+import { fetchContactsAction, getUserAction } from './store/api-actions';
+import PrivateRoute from './components/PrivateRoute';
+import { useSelector } from 'react-redux';
+import authSelectors from './store/auth/selectors';
+
+store.dispatch(fetchContactsAction());
+store.dispatch(getUserAction());
 
 function App() {
+  const { authorizationStatus } = useSelector(authSelectors);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path={'/contacts'} element={
+          <PrivateRoute authorizationStatus={authorizationStatus}>
+            <Contacts />
+          </PrivateRoute>
+        } />
+        <Route path={'/login'} element={<Login />} />
+        <Route path={'/'} element={<HomePage />} />
+
+        <Route path='*' element={<NotFoundPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

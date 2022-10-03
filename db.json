@@ -1,0 +1,92 @@
+{
+  "user": {
+    "name": "d",
+    "password": "d"
+  },
+  "contacts": [
+    {
+      "id": 0,
+      "name": "sasas",
+      "tel": "8 900 00 00 000",
+      "mail": "ruslan@mail.ru"
+    },
+    {
+      "id": 1,
+      "name": "Ivan",
+      "tel": "8 900 00 00 001",
+      "mail": "ivan@mail.ru"
+    },
+    {
+      "id": 2,
+      "name": "Anna",
+      "tel": "8 900 00 00 002",
+      "mail": "max@mail.ru"
+    },
+    {
+      "id": 3,
+      "name": "Lena",
+      "tel": "8 900 00 00 003",
+      "mail": "polena@mail.ru"
+    },
+    {
+      "id": 4,
+      "name": "Rita",
+      "tel": "8 900 00 00 004",
+      "mail": "rita@mail.ru"
+    },
+    {
+      "id": 5,
+      "name": "Katya",
+      "tel": "8 900 00 00 005",
+      "mail": "katya@mail.ru"
+    },
+    {
+      "name": "Anton",
+      "tel": "8-000-000-00-15",
+      "mail": "anton@.mail.ru",
+      "id": 6
+    },
+    {
+      "name": "Vika",
+      "tel": "8000",
+      "mail": "vika@.mail.ru",
+      "id": 7
+    },
+    {
+      "name": "fff",
+      "tel": "fff",
+      "mail": "fff",
+      "id": 8
+    },
+    {
+      "name": "jj",
+      "tel": "jj",
+      "mail": "djj",
+      "id": 9
+    },
+    {
+      "name": "",
+      "tel": "",
+      "mail": "",
+      "id": 10
+    },
+    {
+      "name": "dd",
+      "tel": "d",
+      "mail": "d",
+      "id": 11
+    },
+    {
+      "name": "d",
+      "tel": "d",
+      "mail": "d",
+      "id": 12
+    },
+    {
+      "name": "d",
+      "tel": "d",
+      "mail": "d",
+      "id": 13
+    }
+  ]
+}
