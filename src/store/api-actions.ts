@@ -129,6 +129,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     'user/login',
     async ({ name, password }, { dispatch, extra: api }) => {
         await api.post<AuthData>('/user', { name, password });
+        localStorage.setItem('status', AuthorizationStatus.Auth);
         dispatch(actions.requireAuthorization(AuthorizationStatus.Auth));
         dispatch(getUserAction());
     },
@@ -142,6 +143,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     'user/logout',
     async (_arg, { dispatch, extra: api }) => {
         await api.post<AuthData>('/user', {});
+        localStorage.setItem('status', AuthorizationStatus.NoAuth)
         dispatch(actions.requireAuthorization(AuthorizationStatus.NoAuth));
     },
 );

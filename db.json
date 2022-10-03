@@ -1,7 +1,7 @@
 {
   "user": {
-    "name": "d",
-    "password": "d"
+    "name": "v",
+    "password": "v"
   },
   "contacts": [
     {
@@ -63,30 +63,6 @@
       "tel": "jj",
       "mail": "djj",
       "id": 9
-    },
-    {
-      "name": "",
-      "tel": "",
-      "mail": "",
-      "id": 10
-    },
-    {
-      "name": "dd",
-      "tel": "d",
-      "mail": "d",
-      "id": 11
-    },
-    {
-      "name": "d",
-      "tel": "d",
-      "mail": "d",
-      "id": 12
-    },
-    {
-      "name": "d",
-      "tel": "d",
-      "mail": "d",
-      "id": 13
     }
   ]
 }
