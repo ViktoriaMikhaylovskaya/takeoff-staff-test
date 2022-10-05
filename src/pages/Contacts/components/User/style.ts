@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ExitToApp } from '@mui/icons-material';
 
 export const UserContainer = styled.div`
     display: flex;
@@ -9,6 +10,7 @@ export const UserContainer = styled.div`
     z-index: 1;
     align-items: stretch;
     flex-direction: column;
+    background-color: white;
 `
 
 export const UserInfo = styled.div`
@@ -22,6 +24,9 @@ export const UserInfo = styled.div`
 
 export const UserName = styled.h3`
     word-wrap: break-word;
-    max-width: 100px;
     margin: '0'
+`
+
+export const ExitIcon = styled(ExitToApp)`
+    margin-left: 5px;
 `

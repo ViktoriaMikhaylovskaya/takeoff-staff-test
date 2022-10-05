@@ -1,13 +1,13 @@
-import { Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { HomePageContainer } from './style';
-import { AuthorizationStatus } from '../../store/auth/reducer';
-import authSelectors from '../../store/auth/selectors';
+
+import { HomePageContainer, ButtonsContainer, ContactListButton, LoginButton } from './style';
+import { AuthorizationStatus } from 'src/store/auth/reducer';
+import authSelectors from 'src/store/auth/selectors';
 
 const HomePage = (): JSX.Element => {
-    const navigate = useNavigate();
     const { authorizationStatus } = useSelector(authSelectors);
+    const navigate = useNavigate();
 
     const onClickContactsList = () => {
         if (authorizationStatus === AuthorizationStatus.Auth) {
@@ -18,14 +18,25 @@ const HomePage = (): JSX.Element => {
     return (
         <HomePageContainer>
             <h1>Contacts</h1>
-            <div >
-                <Button color='primary' disabled={authorizationStatus !== AuthorizationStatus.Auth} variant='contained' size='large' onClick={onClickContactsList} style={{ width: '200px', marginRight: '20px', justifyContent: 'space-between' }}>
+            <ButtonsContainer >
+                <ContactListButton
+                    color='primary'
+                    disabled={authorizationStatus !== AuthorizationStatus.Auth}
+                    variant='contained'
+                    size='large'
+                    onClick={onClickContactsList}
+                >
                     Contacts list
-                </Button>
-                <Button color='primary' variant='contained' size='large' onClick={() => navigate('/login')} style={{ width: '200px', justifyContent: 'space-between' }}>
+                </ContactListButton>
+                <LoginButton
+                    color='primary'
+                    variant='contained'
+                    size='large'
+                    onClick={() => navigate('/login')}
+                >
                     Login
-                </Button>
-            </div>
+                </LoginButton>
+            </ButtonsContainer>
         </HomePageContainer>
     )
 }

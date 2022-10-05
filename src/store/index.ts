@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { createAPI } from '../services/api';
-import { reducer as contactsReducer } from '../store/contacts/reducer';
+import { createAPI } from 'src/services/api';
+import { reducer as contactsReducer } from 'src/store/contacts/reducer';
 import { reducer as authReducer } from './auth/reducer';
 
 export const api = createAPI();

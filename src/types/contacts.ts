@@ -1,12 +1,12 @@
-export type Contact = {
+export type IContact = {
     id: number;
     tel: string;
     name: string;
-    mail: string;
+    email: string;
 }
 
-export type AddContact = {
+export type INewContact = {
     tel: string;
     name: string;
-    mail: string;
+    email: string;
 }
