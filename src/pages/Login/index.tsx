@@ -1,40 +1,81 @@
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Button, TextField } from '@mui/material';
+import { Formik } from 'formik';
+import { TextField, Button } from '@mui/material';
+
+import { VALIDATION_SCHEMA } from './constants';
 import { LoginContainer, FormContainer } from './style';
-import { loginAction } from '../../store/api-actions';
-import { store } from '../../store';
-import { AuthorizationStatus } from '../../store/auth/reducer';
-import authSelectors from '../../store/auth/selectors';
-import Label from '../../components/Label';
+import { AuthorizationStatus } from 'src/store/auth/reducer';
+import { loginAction } from 'src/store/api-actions';
+import { store } from 'src/store';
+import authSelectors from 'src/store/auth/selectors';
+import Label from 'src/components/Label';
 import User from '../Contacts/components/User';
 
 const Login = (): JSX.Element => {
     const navigate = useNavigate();
     const { authorizationStatus } = useSelector(authSelectors);
-    const [userData, setUserData] = useState({ name: '', password: '' });
-
-    const handleSubmit = (e: any) => {
-        e.preventDefault();
-        store.dispatch(loginAction(userData));
-        navigate('/');
-    }
 
     return (
         <LoginContainer>
             <h1>Login</h1>
             {authorizationStatus === AuthorizationStatus.Auth && <User />}
-            <FormContainer onSubmit={handleSubmit}>
-                <Label title='User name' marginBottom='20px'>
-                    <TextField onChange={(e) => setUserData({ ...userData, name: e.target.value })} />
-                </Label>
-                <Label title='Password' marginBottom='30px'>
-                    <TextField type='password' onChange={(e) => setUserData({ ...userData, password: e.target.value })} />
-                </Label>
 
-                <Button color='primary' variant='contained' type='submit'>Login</Button>
-            </FormContainer>
+            <Formik
+                validationSchema={VALIDATION_SCHEMA}
+                initialValues={
+                    {
+                        email: '',
+                        password: ''
+                    }}
+                validateOnBlur
+                onSubmit={(values) => {
+                    store.dispatch(loginAction(values));
+                    navigate('/');
+                }}
+            >
+
+                {({ values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty }) => (
+                    <FormContainer onSubmit={handleSubmit}>
+                        <div>
+                            <Label title='email' marginBottom='20px'>
+                                <TextField
+                                    name={'email'}
+                                    type={'email'}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.email}
+                                    error={touched.email && !!errors.email}
+                                    helperText={touched.email && errors.email}
+                                />
+                            </Label>
+                        </div>
+
+                        <div>
+                            <Label title='Password' marginBottom='20px'>
+                                <TextField
+                                    name={'password'}
+                                    type={'password'}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.password}
+                                    error={touched.password && !!errors.password}
+                                    helperText={touched.password && errors.password}
+                                />
+                            </Label>
+                        </div>
+
+                        <Button
+                            type={'submit'}
+                            disabled={!isValid && !dirty}
+                            color='primary'
+                            variant='contained'
+                        >
+                            Login
+                        </Button>
+                    </FormContainer>
+                )}
+            </Formik>
         </LoginContainer>
     );
 }

@@ -1,11 +1,12 @@
-import { Button } from '@mui/material';
-import { ExitToApp, PersonSharp as UserIcon } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { store } from '../../../../store';
-import { logoutAction } from '../../../../store/api-actions';
-import { UserContainer, UserName, UserInfo } from './style';
-import authSelectors from '../../../../store/auth/selectors';
+import { Button } from '@mui/material';
+import { PersonSharp as UserIcon } from '@mui/icons-material';
+
+import { UserContainer, UserName, UserInfo, ExitIcon } from './style';
+import { store } from 'src/store';
+import { logoutAction } from 'src/store/api-actions';
+import authSelectors from 'src/store/auth/selectors';
 
 
 const User = (): JSX.Element => {
@@ -21,11 +22,11 @@ const User = (): JSX.Element => {
         <UserContainer>
             <UserInfo>
                 <UserIcon fontSize='large' />
-                <UserName>{user.name}</UserName>
+                <UserName>{user.email}</UserName>
             </UserInfo>
             <Button color='primary' variant='contained' size='small' onClick={logout}>
                 Logout
-                <ExitToApp style={{ marginLeft: '5px' }} />
+                <ExitIcon />
             </Button>
         </UserContainer>
     )

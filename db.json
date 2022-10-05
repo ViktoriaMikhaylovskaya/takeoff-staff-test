@@ -1,68 +1,74 @@
 {
   "user": {
-    "name": "v",
-    "password": "v"
+    "email": "d@mail.ru",
+    "password": "sssss"
   },
   "contacts": [
     {
       "id": 0,
-      "name": "sasas",
-      "tel": "8 900 00 00 000",
-      "mail": "ruslan@mail.ru"
-    },
-    {
-      "id": 1,
-      "name": "Ivan",
-      "tel": "8 900 00 00 001",
-      "mail": "ivan@mail.ru"
+      "name": "Ruslan",
+      "tel": "89000000001",
+      "email": "ruslan@email.ru"
     },
     {
       "id": 2,
       "name": "Anna",
-      "tel": "8 900 00 00 002",
-      "mail": "max@mail.ru"
+      "tel": "89000000002",
+      "email": "max@email.ru"
     },
     {
       "id": 3,
       "name": "Lena",
-      "tel": "8 900 00 00 003",
-      "mail": "polena@mail.ru"
+      "tel": "89333000003",
+      "email": "polena@email.ru"
     },
     {
       "id": 4,
       "name": "Rita",
-      "tel": "8 900 00 00 004",
-      "mail": "rita@mail.ru"
+      "tel": "89000000004",
+      "email": "rita@email.ru"
     },
     {
       "id": 5,
       "name": "Katya",
-      "tel": "8 900 00 00 005",
-      "mail": "katya@mail.ru"
+      "tel": "89000000005",
+      "email": "katya@email.ru"
     },
     {
       "name": "Anton",
-      "tel": "8-000-000-00-15",
-      "mail": "anton@.mail.ru",
+      "tel": "80000000015",
+      "email": "anton@email.ru",
       "id": 6
     },
     {
       "name": "Vika",
-      "tel": "8000",
-      "mail": "vika@.mail.ru",
+      "tel": "80000006666",
+      "email": "vika@email.ru",
       "id": 7
     },
     {
-      "name": "fff",
-      "tel": "fff",
-      "mail": "fff",
-      "id": 8
+      "name": "Виктория",
+      "tel": "7000000000000",
+      "email": "d@mail.ru",
+      "id": 11
     },
     {
-      "name": "jj",
-      "tel": "jj",
-      "mail": "djj",
-      "id": 9
+      "name": "Tolik",
+      "tel": "89000000001",
+      "email": "",
+      "id": 12
+    },
+    {
+      "name": "Sasha",
+      "tel": "89000000001",
+      "email": "sasha@mail.ru",
+      "id": 13
+    },
+    {
+      "name": "Кексик",
+      "tel": "5555555555555",
+      "email": "",
+      "id": 14
     }
   ]
 }

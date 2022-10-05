@@ -1,23 +1,23 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { store } from './store';
-import { fetchContactsAction, getUserAction } from './store/api-actions';
-import Contacts from './pages/Contacts';
-import Login from './pages/Login';
-import NotFoundPage from './pages/NotFoundPage';
-import HomePage from './pages/HomePage';
-import PrivateRoute from './components/PrivateRoute';
+import { PrivateRoute } from 'src/components';
 import { AuthorizationStatus } from './store/auth/reducer';
+import { Contacts, Login, NotFoundPage, HomePage } from 'src/pages';
+import { fetchContactsAction, getUserAction } from './store/api-actions';
 
 store.dispatch(fetchContactsAction());
 store.dispatch(getUserAction());
 
 function App() {
+  const authorizationStatus = localStorage.getItem('status') === AuthorizationStatus.Auth ?
+    AuthorizationStatus.Auth : AuthorizationStatus.NoAuth
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path={'/contacts'} element={
           <PrivateRoute
-            authorizationStatus={localStorage.getItem('status') === AuthorizationStatus.Auth ? AuthorizationStatus.Auth : AuthorizationStatus.NoAuth}>
+            authorizationStatus={authorizationStatus}>
             <Contacts />
           </PrivateRoute>
         } />

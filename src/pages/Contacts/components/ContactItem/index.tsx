@@ -1,68 +1,116 @@
-import { CheckSharp as Save } from '@mui/icons-material';
+import { useState } from 'react';
+import { Formik } from 'formik';
+import { CheckSharp as Save, EditOff } from '@mui/icons-material';
 import { TextField, Button } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { ContactsItem, ContactsItemsIcon } from '../../style';
-import { ContactName, ContactTel, ContactMail, Edit, Delete } from './style';
-import Label from '../../../../components/Label';
-import { deleteContactAction, editContactAction } from '../../../../store/api-actions';
-import { store } from '../../../../store';
-import { Contact } from '../../../../types/contacts';
 
-const ContactItem = ({ contact }: { contact: Contact }): JSX.Element => {
+import { VALIDATION_SCHEMA } from '../../constants';
+import { ContactsItem, IconsContainer, ContactName, ContactTel, Contactemail, EditIcon, DeleteIcon } from './style';
+import { deleteContactAction, editContactAction } from 'src/store/api-actions';
+import { IContact } from 'src/types/contacts';
+import { Label } from 'src/components';
+import { store } from 'src/store';
+
+const ContactItem = ({ contact }: { contact: IContact }): JSX.Element => {
     const [isEdit, setIsEdit] = useState(false);
-    const [name, setName] = useState(contact.name);
-    const [tel, setTel] = useState(contact.tel);
-    const [mail, setMail] = useState(contact.mail);
-
-    useEffect(() => { setName(contact.name) }, [contact])
-
 
     const handleClickEdit = () => {
         setIsEdit(!isEdit);
-    };
+    }
 
     const deleteContact = () => {
         store.dispatch(deleteContactAction(contact.id));
     }
 
-    const editContact = () => {
+    const onHandleSubmit = (values: IContact) => {
         store.dispatch(editContactAction({
             id: contact.id,
-            name,
-            tel,
-            mail
+            name: values.name,
+            tel: values.tel,
+            email: values.email,
         }));
+        setIsEdit(!isEdit);
     }
 
     return (
         <ContactsItem>
-            {!isEdit
-                ? <div>
-                    <ContactName>{contact.name}</ContactName>
-                    <ContactTel>tel: {contact.tel}</ContactTel>
-                    <ContactMail>mail: {contact.mail}</ContactMail>
-                </div>
-                : <div>
-                    <Label title='name:' marginBottom='10px'>
-                        <TextField size='small' value={name} onChange={(e) => setName(e.target.value)} />
-                    </Label>
-                    <Label title='tel:' marginBottom='10px'>
-                        <TextField size='small' value={tel} onChange={(e) => setTel(e.target.value)} />
-                    </Label>
-                    <Label title='mail:' marginBottom='12.5px'>
-                        <TextField size='small' value={mail} onChange={(e) => setMail(e.target.value)} />
-                    </Label>
-                </div>
-            }
-            <ContactsItemsIcon>
-                {!isEdit
-                    ? <Edit onClick={handleClickEdit} />
-                    : <Button color='success' variant='text' size='small' onClick={handleClickEdit}>
-                        <Save onClick={editContact} />
-                    </Button>
-                }
-                <Delete onClick={deleteContact} />
-            </ContactsItemsIcon>
+            <Formik
+                validationSchema={VALIDATION_SCHEMA}
+                initialValues={contact}
+                validateOnBlur
+                onSubmit={onHandleSubmit}
+                enableReinitialize
+            >
+
+                {({ values, errors, touched, handleChange, isValid, handleSubmit, dirty, handleReset }) => (
+                    <form onSubmit={handleSubmit}>
+                        {!isEdit
+                            ? <div>
+                                <ContactName>{contact.name}</ContactName>
+                                <ContactTel>tel: {contact.tel}</ContactTel>
+                                <Contactemail>email: {contact.email}</Contactemail>
+                            </div>
+                            : <div>
+                                <Label title='name:' marginBottom='10px'>
+                                    <TextField
+                                        size='small'
+                                        name={'name'}
+                                        type={'name'}
+                                        onChange={handleChange}
+                                        value={values.name}
+                                        error={touched.name && !!errors.name}
+                                        helperText={touched.name && errors.name}
+                                    />
+                                </Label>
+                                <Label title='tel:' marginBottom='10px'>
+                                    <TextField
+                                        size='small'
+                                        name={'tel'}
+                                        type={'tel'}
+                                        onChange={handleChange}
+                                        value={values.tel}
+                                        error={touched.tel && !!errors.tel}
+                                        helperText={touched.tel && errors.tel}
+                                    />
+                                </Label>
+                                <Label title='email:' marginBottom='12.5px'>
+                                    <TextField
+                                        size='small'
+                                        name={'email'}
+                                        type={'email'}
+                                        onChange={handleChange}
+                                        value={values.email}
+                                        error={touched.email && !!errors.email}
+                                        helperText={touched.email && errors.email}
+                                    />
+                                </Label>
+                            </div>
+                        }
+                        <IconsContainer>
+                            {!isEdit
+                                ? <>
+                                    <EditIcon onClick={handleClickEdit} />
+                                    <DeleteIcon onClick={deleteContact} />
+                                </>
+                                : <>
+                                    <Button
+                                        color='success'
+                                        variant='text'
+                                        size='small'
+                                        type={'submit'}
+                                        disabled={!isValid && !dirty}
+                                    >
+                                        <Save />
+                                    </Button>
+                                    <EditOff onClick={() => {
+                                        setIsEdit(!isEdit);
+                                        handleReset();
+                                    }} />
+                                </>
+                            }
+                        </IconsContainer>
+                    </form>
+                )}
+            </Formik>
         </ContactsItem>
     );
 }

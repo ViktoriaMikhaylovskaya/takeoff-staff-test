@@ -1,5 +1,5 @@
 import { createReducer, createAction } from '@reduxjs/toolkit';
-import { AuthData } from '../../types/user';
+import { IAuthData } from 'src/types/user';
 
 export enum AuthorizationStatus {
     Auth = 'AUTH',
@@ -9,17 +9,17 @@ export enum AuthorizationStatus {
 
 export const actions = {
     requireAuthorization: createAction<AuthorizationStatus>('user/requireAuthorization'),
-    setUser: createAction<AuthData>('user/data'),
+    setUser: createAction<IAuthData>('user/data'),
 };
 
 export type State = {
     authorizationStatus: AuthorizationStatus,
-    user: AuthData,
+    user: IAuthData,
 };
 
 const initialState: State = {
     authorizationStatus: AuthorizationStatus.Unknown,
-    user: {} as AuthData,
+    user: {} as IAuthData,
 };
 
 const reducer = createReducer(initialState, (builder) => {

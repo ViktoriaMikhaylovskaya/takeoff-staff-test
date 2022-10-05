@@ -40,9 +40,9 @@ export const NameField = styled(TextField)`
 `
 
 export const TelField = styled(TextField)`
-    width: 327px;
+    width: 340px;
 `
 
 export const MailField = styled(TextField)`
-    width: 327px;
+    width: 340px;
 `
